@@ -57,8 +57,16 @@ void LoadBalancer::displayServerLoads() {
 }
 
 bool servidorLleno(int serverID){
-    return requestsPerServer[serverID] > maxPeticiones;
+    return requestsPerServer[serverID] > maxPeticiones; // para verificar si esta lleno el servidor
 }
 
 void generador(){
+    srand(time(0));
+    for(int i =0; i < numServers; ++i){
+        for (int j = i + 1; j < numServers; ++j){
+            int cost = rand() % 20 + 1;
+            adjMatrix[i][j] = cost;
+            adjMatrix[j][i] = cost;
+        }
+    }
 }
