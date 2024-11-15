@@ -55,3 +55,10 @@ void LoadBalancer::displayServerLoads() {
         std::cout << "Servidor " << i << ": " << requestsPerServer[i] << " solicitudes\n";
     }
 }
+
+bool servidorLleno(int serverID){
+    return requestsPerServer[serverID] > maxPeticiones;
+}
+
+void generador(){
+}
