@@ -21,7 +21,7 @@ public:
     int distributeRequest(int startServer);
     void completeRequest(int serverId);
     void displayServerLoads();
-    int servidorLleno();  //revisar si el servidor esta lleno
+    int servidorLleno(int serverID);  //revisar si el servidor esta lleno
     void generador();  //generar los costos de forma aleatoria
 };
 
