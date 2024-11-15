@@ -2,7 +2,7 @@
 
 using namespace std;
 
-LoadBalancer::LoadBalancer(int n, const vector<vector<int> > &matrix)
+LoadBalancer::LoadBalancer(int n, const vector<vector<int> > &matrix, int maxPeticiones)
 : numServers(n), adjMatrix(matrix), requestsPerServer(n, 0){};
 
 
