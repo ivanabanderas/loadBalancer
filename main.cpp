@@ -5,6 +5,13 @@
 int main()
 {
     int numServers = 4;
+    int maxPeticiones;
+
+    cout << "Ingrese el número de servidores;
+    cin >> numServers;
+
+    cout << "Ingrese el número de peticiones máximas por servidor";
+    cin >> maxPeticiones;
 
     std::vector<std::vector<int>> matrix = {
         {0, 10, 3, INF},
@@ -13,7 +20,11 @@ int main()
         {INF, 2, 8, 0}
     };
 
-    LoadBalancer lb(numServers, matrix);
+    vector <vector<int>> matrix(numServers, vector<int>(numServers, INF));
+
+    LoadBalancer lb(numServers, matrix, maxPeticiones);
+
+    lb.generador();
 
     lb.distributeRequest(0);
     lb.distributeRequest(0);
