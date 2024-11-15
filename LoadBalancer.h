@@ -12,6 +12,7 @@ const int INF = INT_MAX;
 class LoadBalancer {
 private:
     int numServers;
+    int maxPeticiones;
     std::vector<std::vector<int>> adjMatrix;
     std::vector<int> requestsPerServer;
 
@@ -20,6 +21,8 @@ public:
     int distributeRequest(int startServer);
     void completeRequest(int serverId);
     void displayServerLoads();
+    int servidorLleno();
+    void generador();
 };
 
 #endif
