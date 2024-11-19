@@ -17,7 +17,7 @@ private:
     std::vector<int> requestsPerServer;
 
 public:
-    LoadBalancer(int n, const std::vector<std::vector<int>>& matrix);
+    LoadBalancer(int n, const std::vector<std::vector<int>>& matrix, int maxPeticiones);
     int distributeRequest(int startServer);
     void completeRequest(int serverId);
     void displayServerLoads();
