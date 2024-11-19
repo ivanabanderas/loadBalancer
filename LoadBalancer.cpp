@@ -1,9 +1,11 @@
 #include "LoadBalancer.h"
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
 LoadBalancer::LoadBalancer(int n, const vector<vector<int> > &matrix, int maxPeticiones)
-: numServers(n), adjMatrix(matrix), requestsPerServer(n, 0){};
+: numServers(n), adjMatrix(matrix), maxPeticiones(maxPeticiones), requestsPerServer(n, 0){};
 
 
 int LoadBalancer::distributeRequest(int startServer) {
