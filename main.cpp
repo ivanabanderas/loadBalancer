@@ -1,38 +1,60 @@
-#include <iostream>
+    #include <iostream>
 
-#include "LoadBalancer.h"
+    #include "LoadBalancer.h"
 
-int main()
-{
-    int numServers = 4;
-    int maxPeticiones;
+    int main(){
+        srand(time(nullptr));   // para poder generar los números aleatorios
 
-    cout << "Ingrese el número de servidores;
-    cin >> numServers;
+        int numServers;
+        cout << "Cuantos servidores quiere configurar? \n";
+        cin >> numServers;
 
-    cout << "Ingrese el número de peticiones máximas por servidor";
-    cin >> maxPeticiones;
+        int maxRequests;
+        cout << "Cual es el limite maximo de peticiones por servidor? \n";
+        cin >> maxRequests;
 
-    std::vector<std::vector<int>> matrix = {
-        {0, 10, 3, INF},
-        {10, 0, 1, 2},
-        {3, 1, 0, 8},
-        {INF, 2, 8, 0}
-    };
+        vector<vector<int>> matrix(numServers, vector<int>(numServers, INF)); //se inializa el vector para poder crear la matriz
 
-    vector <vector<int>> matrix(numServers, vector<int>(numServers, INF));
 
-    LoadBalancer lb(numServers, matrix, maxPeticiones);
+        //Matriz de adyacencia, para el número de servidores con los números generados
+        for(int i = 0; i< numServers; ++i){
+            for(int j = 0; j < numServers; j++){
+                if (i == j){
+                    matrix[i][j] = 0;    //en el caso que sea el mismo servior se pone 0
+                }
+                else{
+                    int cost = (rand() % 100 < 80) ? rand() % 10 + 1 : INF;
+                    matrix[i][j] = cost;     //se crea el costo aleatorio
+                    matrix[i][j] = cost;     //se crea el costo aleatorio
+                }
+            }
+        }
 
-    lb.generador();
+        //Imprimir la matriz
+        cout << "Matriz: \n";
+        for(int i = 0; i< numServers; ++i){
+            for(int j = 0; j < numServers; j++){
+                if (matrix[i][j] == INF){
+                cout << "INF\t";
+                }
+                else{
+                    cout << matrix[i][j] << "\t";
+                }
+            }
+            cout << "\n";
+        }
 
-    lb.distributeRequest(0);
-    lb.distributeRequest(0);
-    lb.distributeRequest(1);
-    lb.completeRequest(2);
-    lb.distributeRequest(1);
+        LoadBalancer lb(numServers, matrix, maxRequests);
 
-    lb.displayServerLoads();
+        lb.distributeRequest(0);
+        lb.distributeRequest(0);
+        lb.distributeRequest(1);
+        lb.completeRequest(2);
+        lb.distributeRequest(1);
 
-    return 0;
-}
+        lb.displayServerLoads();
+
+        return 0;
+    }
+
+//video: https://drive.google.com/drive/folders/1prhZdpXMNeJnauPBtPP9NQGFsmySgysO?usp=sharing
