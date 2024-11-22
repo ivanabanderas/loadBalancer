@@ -25,7 +25,7 @@
                 else{
                     int cost = (rand() % 100 < 80) ? rand() % 10 + 1 : INF;
                     matrix[i][j] = cost;     //se crea el costo aleatorio
-                    matrix[i][j] = cost;     //se crea el costo aleatorio
+                    matrix[j][i] = cost;     //se crea el costo aleatorio
                 }
             }
         }
@@ -56,5 +56,3 @@
 
         return 0;
     }
-
-//video: https://drive.google.com/drive/folders/1prhZdpXMNeJnauPBtPP9NQGFsmySgysO?usp=sharing
