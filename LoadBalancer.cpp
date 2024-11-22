@@ -32,7 +32,7 @@ int LoadBalancer::distributeRequest(int startServer) {
                   << " desde Servidor " << startServer << ", Carga actual: "
                   << requestsPerServer[selectedServer] << "\n";
     } 
-    else if(fullServers = numServers -1){
+    else if(fullServers == numServers -1){
         cout << "Todos los servidores estan llenos \n";
     }
     else {
