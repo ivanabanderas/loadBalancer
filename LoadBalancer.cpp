@@ -1,11 +1,11 @@
 #include "LoadBalancer.h"
-#include <ctime>
-#include <cstdlib>
 
 using namespace std;
 
-LoadBalancer::LoadBalancer(int n, const vector<vector<int> > &matrix, int maxPeticiones)
-: numServers(n), adjMatrix(matrix), maxPeticiones(maxPeticiones), requestsPerServer(n, 0){};
+int fullServers = 0;
+
+LoadBalancer::LoadBalancer(int n, const std::vector<std::vector<int>>& matrix, int maxRequests)
+: numServers(n), adjMatrix(matrix), requestsPerServer(n, 0), maxRequests(maxRequests){};
 
 
 int LoadBalancer::distributeRequest(int startServer) {
@@ -17,7 +17,7 @@ int LoadBalancer::distributeRequest(int startServer) {
             // Se valida si los request activos del servidor seleccionado son menores que
             // los que estan activos en la iteracion de la matrix o si el servidor seleccionado
             // no se ha asignado
-            if ((requestsPerServer[i] < requestsPerServer[selectedServer] || selectedServer == -1) &&
+            if ((requestsPerServer[i] < maxRequests) && (requestsPerServer[i] < requestsPerServer[selectedServer] || selectedServer == -1) &&
                 (adjMatrix[startServer][i] < minCost)) {
                 // se actualiza el costo del servidor ese costo se encuentra el la matrix
                 minCost = adjMatrix[startServer][i];
@@ -31,7 +31,11 @@ int LoadBalancer::distributeRequest(int startServer) {
         cout << "Solicitud asignada al Servidor " << selectedServer
                   << " desde Servidor " << startServer << ", Carga actual: "
                   << requestsPerServer[selectedServer] << "\n";
-    } else {
+    } 
+    else if(fullServers = numServers -1){
+        cout << "Todos los servidores estan llenos \n";
+    }
+    else {
         cout << "No hay servidores disponibles desde el Servidor " << startServer << "\n";
     }
     return selectedServer;
@@ -55,20 +59,5 @@ void LoadBalancer::displayServerLoads() {
     std::cout << "Cargas actuales de los servidores:\n";
     for (int i = 0; i < numServers; ++i) {
         std::cout << "Servidor " << i << ": " << requestsPerServer[i] << " solicitudes\n";
-    }
-}
-
-bool servidorLleno(int serverID){
-    return requestsPerServer[serverID] > maxPeticiones; // para verificar si esta lleno el servidor
-}
-
-void generador(){
-    srand(time(0));
-    for(int i =0; i < numServers; ++i){
-        for (int j = i + 1; j < numServers; ++j){
-            int cost = rand() % 20 + 1;
-            adjMatrix[i][j] = cost;
-            adjMatrix[j][i] = cost;
-        }
     }
 }
