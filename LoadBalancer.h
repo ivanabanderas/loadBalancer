@@ -16,8 +16,8 @@ class LoadBalancer {
 private:
     int numServers;
     int maxRequests;
-    std::vector<std::vector<int>> adjMatrix;
-    std::vector<int> requestsPerServer;
+    vector<std::vector<int>> adjMatrix;
+    vector<int> requestsPerServer;
 
 public:
     LoadBalancer(int n, const std::vector<std::vector<int>>& matrix, int maxRequests);
