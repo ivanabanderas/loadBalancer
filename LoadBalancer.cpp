@@ -4,7 +4,7 @@ using namespace std;
 
 int fullServers = 0;
 
-LoadBalancer::LoadBalancer(int n, const std::vector<std::vector<int>>& matrix, int maxRequests)
+LoadBalancer::LoadBalancer(int n, const vector<vector<int>>& matrix, int maxRequests)
 : numServers(n), adjMatrix(matrix), requestsPerServer(n, 0), maxRequests(maxRequests){};
 
 
@@ -51,12 +51,12 @@ void LoadBalancer::completeRequest(int serverId) {
     }
 
     requestsPerServer[serverId]--;
-    std::cout << "Solicitud completada en el Servidor " << serverId
+    cout << "Solicitud completada en el Servidor " << serverId
              << ", Carga actual: " << requestsPerServer[serverId] << "\n";
 }
 
 void LoadBalancer::displayServerLoads() {
-    std::cout << "Cargas actuales de los servidores:\n";
+    cout << "Cargas actuales de los servidores:\n";
     for (int i = 0; i < numServers; ++i) {
         std::cout << "Servidor " << i << ": " << requestsPerServer[i] << " solicitudes\n";
     }
